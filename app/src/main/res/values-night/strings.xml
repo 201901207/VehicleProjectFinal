@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="string_vin">VIN:</string>
+    <string name="company">Company:</string>
+    <string name="plate_no">Plate No.:</string>
+    <string name="model">Model:</string>
+    <string name="type">Type:</string>
+    <string name="add_new_vehicle">Add New Vehicle</string>
+    <string name="model_of_vehicle">Model of Vehicle</string>
+    <string name="type_of_vehicle">Type of Vehicle</string>
+    <string name="company_name">Company Name</string>
+    <string name="enter_vin_number">Enter VIN Number</string>
+    <string name="enter_plat_no">Enter Plat No</string>
+</resources>
