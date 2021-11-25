@@ -23,21 +23,24 @@ import java.util.List;
 public class VehicleRVAdapter extends RecyclerView.Adapter<VehicleRVAdapter.VehicleViewHolder> {
 
     private List<Vehicle> vehicleList = new ArrayList<>();
-    VehicleViewModel vehicleViewModel;
+    private onVehicleItemClickListener onVehicleItemClickListener;
 //    public VehicleRVAdapter(List<Vehicle> vehicleList) {
 //        this.vehicleList = vehicleList;
 //    }
 
-    public void setVehicleList(List<Vehicle> vehicleList,VehicleViewModel vehicleViewModel) {
+    public void setVehicleList(List<Vehicle> vehicleList) {
         this.vehicleList = vehicleList;
-        this.vehicleViewModel = vehicleViewModel;
         notifyDataSetChanged();
+    }
+
+    public Vehicle getVehicle(int position) {
+        return vehicleList.get(position);
     }
 
     @NonNull
     @Override
     public VehicleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.vehicle_item, parent , false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.vehicle_item, parent, false);
         return new VehicleViewHolder(itemView);
     }
 
@@ -46,18 +49,10 @@ public class VehicleRVAdapter extends RecyclerView.Adapter<VehicleRVAdapter.Vehi
         Vehicle vehicleCurrent = vehicleList.get(position);
         holder.textViewVIN.setText(vehicleCurrent.getVIN());
         holder.textViewCompany.setText(vehicleCurrent.getCompany());
-        String plateNumber = vehicleCurrent.getPlat_statCode()+ " " + vehicleCurrent.getPlat_distCode()+ " "+vehicleCurrent.getPlat_codeNum();
+        String plateNumber = vehicleCurrent.getPlat_statCode() + " " + vehicleCurrent.getPlat_distCode() + " " + vehicleCurrent.getPlat_codeNum();
         holder.textViewPlateNo.setText(plateNumber);
         holder.textViewType.setText(vehicleCurrent.getVehicle_type());
         holder.textViewModel.setText(vehicleCurrent.getVehicle_model());
-
-        holder.delBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                vehicleViewModel.delete(vehicleCurrent);
-            }
-        });
-
 
     }
 
@@ -66,24 +61,39 @@ public class VehicleRVAdapter extends RecyclerView.Adapter<VehicleRVAdapter.Vehi
         return vehicleList.size();
     }
 
-    class VehicleViewHolder extends RecyclerView.ViewHolder{
+    class VehicleViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textViewVIN;
         private TextView textViewPlateNo;
         private TextView textViewCompany;
         private TextView textViewType;
         private TextView textViewModel;
-        private ImageButton delBtn;
 
         public VehicleViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            textViewVIN =itemView.findViewById(R.id.tv_vin);
+            textViewVIN = itemView.findViewById(R.id.tv_vin);
             textViewCompany = itemView.findViewById(R.id.tv_companyname);
             textViewModel = itemView.findViewById(R.id.tv_model);
             textViewPlateNo = itemView.findViewById(R.id.tv_platnum);
             textViewType = itemView.findViewById(R.id.tv_type);
-            delBtn = itemView.findViewById(R.id.btnDel);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onVehicleItemClickListener != null && getAdapterPosition() != RecyclerView.NO_POSITION) {
+                        onVehicleItemClickListener.onVehicleClick(vehicleList.get(getAdapterPosition()));
+                    }
+                }
+            });
         }
+    }
+
+    public interface onVehicleItemClickListener {
+        void onVehicleClick(Vehicle vehicle);
+    }
+
+    public void setonVehicleItemClickListener(onVehicleItemClickListener onVehicleItemClickListener) {
+        this.onVehicleItemClickListener =onVehicleItemClickListener;
     }
 }

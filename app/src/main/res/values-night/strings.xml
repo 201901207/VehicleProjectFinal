@@ -11,4 +11,6 @@
     <string name="company_name">Company Name</string>
     <string name="enter_vin_number">Enter VIN Number</string>
     <string name="enter_plat_no">Enter Plat No</string>
+    <string name="change">Change</string>
+    <string name="cancel">Cancel</string>
 </resources>
