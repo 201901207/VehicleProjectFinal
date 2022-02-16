@@ -7,7 +7,7 @@ We add basic CRUD features in the app.<br />
   Empty check of the field will also be performed before insertion.<br />
 Download the APK and check it out<br /><br />
 # SRS and Schema Refinement
-We have added the pdf file of the documentation of all the process,i.e. SRS, Noun Analysis, ER Diagram, ER to Relational model conversion, Normalization and Schema Refinement.<br />
+We have added the pdf file in "Documentation PDF" where we have the documentation of all the process,i.e. SRS, Noun Analysis, ER Diagram, ER to Relational model conversion, Normalization and Schema Refinement.<br />
 We have implemented the developed schema on PostgreSQL and run some SQL Query(basic to advance) and include the output in the pdf too.<br /><br /><br />Please take a look at everything:) 
 
   
